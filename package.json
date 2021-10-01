@@ -1,6 +1,6 @@
 {
   "name": "discord-auto-role",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Simple Discord.js Module that allow discord member to assign and remove themself role by using the bot.",
   "main": "discord-auto-role.js",
   "scripts": {

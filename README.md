@@ -83,7 +83,7 @@ Liens:  https://www.bucherons.ca, https://www.gardiensdulys.com, https://www.bar
 You can reach me via my Discord Development Server at https://discord.gg/Tmtjkwz
 
 ###History:  
-3.0.1 Initial v13 Version
+3.0.2 Initial v13 Version
 2.0.0 Initial v12 Version  
 1.3.0 Latest Discord.JS v11 version, use "npm i discord-auto-role@discord.js-v11" to install  
 1.0.0 Initial publish  

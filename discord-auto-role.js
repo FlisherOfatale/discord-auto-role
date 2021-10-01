@@ -9,10 +9,10 @@ module.exports = function (client, options) {
 	const description = {
 		name: `discord-auto-role`,
 		filename: `discord-auto-role.js`,
-		version: `3.0.1`
+		version: `3.0.2`
 	}
 
-	const debug = true
+	const debug = false
 	console.log(`Module: ${description.name} | Loaded - version ${description.version} from ("${description.filename}")`)
 	const DiscordJSversion = require("discord.js").version.substring(0, 2)
 
