@@ -1,33 +1,53 @@
 /*
 
-Simple Discord.js v12 Module that allow discord member to assign and remove themself role by using the bot
+Simple Discord.js v13 Module that allow discord member to assign and remove themself role by using the bot
 Author: Flisher (andre@jmle.net)
-
-2.0.0 Initial v12 Version  
-1.3.0 Latest Discord.JS v11 version, use "npm i discord-auto-role@discord.js-v11" to install  
-1.0.0 Initial publish  
 
 */
 
-module.exports = function (bot, options) {
+module.exports = function (client, options) {
 	const description = {
 		name: `discord-auto-role`,
 		filename: `discord-auto-role.js`,
-		version: `2.0.0`
+		version: `3.0.1`
 	}
 
-	console.log(`Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`)
+	const debug = true
+	console.log(`Module: ${description.name} | Loaded - version ${description.version} from ("${description.filename}")`)
+	const DiscordJSversion = require("discord.js").version.substring(0, 2)
 
-	// Check if version is 12, if not, abort
-	let DiscordJSversion = require('discord.js').version
-	if (DiscordJSversion.substring(0, 2) !== "12") console.error(`This version of discord-auto-role only run on DiscordJS v12 and up, please run "npm install discord-auto-role@discord.js-v11" to install an DiscordJS v11`)
-	if (DiscordJSversion.substring(0, 2) !== "12") return
+	if (DiscordJSversion === '11') console.error("This version of discord-auto-role only run on DiscordJS V13 and up, please run \"npm i discord-playing@discord.js-v11\" to install an older version")
+	if (DiscordJSversion === '12') console.error("This version of discord-auto-role only run on DiscordJS V13 and up, please run \"npm i discord-playing@discord.js-v12\" to install an older version")
+	if (DiscordJSversion !== '13') return
 
-	bot.on("message", async message => {
+	// Check that required Gateway Intention
+	const {
+		Intents
+	} = require('discord.js');
+	const liveIntent = new Intents(client.options.intents)
+	const requiredIntent = ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES']
+	const gotAllIntent = liveIntent.has(requiredIntent)
+
+	if (gotAllIntent) {
+	// Continue
+	} else {
+		console.log(`Module: ${description.name} | Version ${description.version} NOT initialized due to the following reasons ")`)
+		for (let i in requiredIntent) {
+			let checkedIntent = requiredIntent[i]
+			if (!liveIntent.has(requiredIntent[i])) {
+				console.log(`Module: ${description.name} | Missing Gateway Intent ${requiredIntent[i]}`)
+			}
+		}
+	}
+
+	client.on("messageCreate", async message => {
+		if (debug) console.log(`Module: ${description.name} | DEBUG | messageCreate triggered`)
 
 		// do not take action on bots
 		if (message.author.bot) return;
-		if (message.channel.type !== "text") return;
+
+		if (!message.channel.isText()) return;
+		
 		var modconf
 		// Validate single or multi-server configuration
 		if (options && options.prefix) {
@@ -57,9 +77,7 @@ module.exports = function (bot, options) {
 					try {
 						message.channel.send(msg).then(m => {
 							try {
-								m.delete({
-									"timeout": modconf.prunetimer
-								})
+								setTimeout(() => m.delete(), modconf.prunetimer);
 							} catch (e) {
 								console.error(`Module: ${description.name} -> Error while deleting instruction message): \n ${e}`);
 								console.error(e)
@@ -126,9 +144,7 @@ module.exports = function (bot, options) {
 			// cleanup the request message if it was treated
 			if (tobedeleted === true) {
 				try {
-					message.delete({
-						timeout: 3000
-					})
+					setTimeout(() => message.delete(), 3000);
 				} catch (e) {
 					console.error(`Module: ${description.name} -> Error while deleting user command message): \n ${e}`);
 					console.error(e)

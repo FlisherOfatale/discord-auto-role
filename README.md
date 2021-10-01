@@ -10,6 +10,11 @@ Simply type the following command to install the module and it depedencies.
 npm i discord-auto-role
 ``` 
 
+##Discord.js v11 and v12 compatibility 
+You can install DiscordJS v11 and v12 version using tag.  These aren't maintained anymore.
+V11: `npm install discord-auto-role@discord.js-v11`  
+V12: `npm install discord-auto-role@discord.js-v12`  
+
 Once you've done this, setting the module will be very easy.
 And you can follow the code  below to get started!
 
@@ -44,7 +49,7 @@ AutoRole(bot, {
 		},
 		"helpcmd" :  "location",
 		"msg" : "Please use one of the following command to assign or remove the desired group:",
-		"prunetimer" : "30" 
+		"prunetimer" : "30000" 
 	},
 	"serverid2" : {
 		"prefix" : "!",
@@ -55,7 +60,7 @@ AutoRole(bot, {
 		},
 		"helpcmd" :  "location",
 		"msg" : "Please use one of the following command to assign or remove the desired group:",
-		"prunetimer" : "30" 
+		"prunetimer" : "30000" 
 	}
 });
 ```
@@ -78,6 +83,7 @@ Liens:  https://www.bucherons.ca, https://www.gardiensdulys.com, https://www.bar
 You can reach me via my Discord Development Server at https://discord.gg/Tmtjkwz
 
 ###History:  
+3.0.1 Initial v13 Version
 2.0.0 Initial v12 Version  
 1.3.0 Latest Discord.JS v11 version, use "npm i discord-auto-role@discord.js-v11" to install  
 1.0.0 Initial publish  
